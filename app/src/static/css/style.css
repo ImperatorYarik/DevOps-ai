@@ -1,5 +1,22 @@
+/* VS Code Dark Theme Colors */
+:root {
+    --vscode-bg: #1e1e1e;
+    --vscode-text: #d4d4d4;
+    --vscode-selection: #264f78;
+    --vscode-menu: #252526;
+    --vscode-menu-hover: #2a2d2e;
+    --vscode-line-number: #858585;
+    --vscode-blue: #569cd6;
+    --vscode-yellow: #dcdcaa;
+    --vscode-orange: #ce9178;
+    --vscode-green: #6a9955;
+    --vscode-purple: #c586c0;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    background-color: var(--vscode-bg);
+    color: var(--vscode-text);
     margin: 0;
     padding: 0;
     line-height: 1.6;
@@ -11,9 +28,11 @@ body {
     padding: 20px;
 }
 
+/* Navigation styling */
 nav {
-    background-color: #333;
+    background-color: var(--vscode-menu);
     padding: 1rem;
+    border-bottom: 1px solid #333;
 }
 
 nav ul {
@@ -27,7 +46,136 @@ nav ul li {
 }
 
 nav ul li a {
-    color: white;
+    color: var(--vscode-text);
     text-decoration: none;
     padding: 0.5rem 1rem;
+    transition: background-color 0.2s;
+    border-radius: 3px;
+}
+
+nav ul li a:hover {
+    background-color: var(--vscode-menu-hover);
+}
+
+/* Content styling */
+h1 {
+    color: var(--vscode-blue);
+    font-weight: normal;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.5rem;
+}
+
+p {
+    color: var(--vscode-text);
+}
+
+/* Links */
+a {
+    color: var(--vscode-blue);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Code blocks */
+pre, code {
+    background-color: #252526;
+    border-radius: 3px;
+    padding: 0.2em 0.4em;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+/* Selection */
+::selection {
+    background-color: var(--vscode-selection);
+    color: var(--vscode-text);
+}
+
+/* Custom elements */
+.message {
+    color: var(--vscode-yellow);
+    font-style: italic;
+}
+
+.error {
+    color: #f44747;
+}
+
+.success {
+    color: var(--vscode-green);
+}
+
+/* Button styling */
+button {
+    background-color: var(--vscode-menu);
+    color: var(--vscode-text);
+    border: 1px solid #454545;
+    padding: 8px 12px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: var(--vscode-menu-hover);
+}
+
+/* Input styling */
+input, textarea {
+    background-color: var(--vscode-menu);
+    color: var(--vscode-text);
+    border: 1px solid #454545;
+    padding: 8px;
+    border-radius: 3px;
+    font-family: inherit;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--vscode-blue);
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+}
+
+th, td {
+    padding: 8px;
+    border: 1px solid #454545;
+    text-align: left;
+}
+
+th {
+    background-color: var(--vscode-menu);
+    color: var(--vscode-blue);
+}
+
+tr:nth-child(even) {
+    background-color: #252526;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 14px;
+    height: 14px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--vscode-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #424242;
+    border: 3px solid var(--vscode-bg);
+    border-radius: 7px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #525252;
 }
