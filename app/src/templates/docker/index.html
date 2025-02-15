@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+
+<h1>Docker</h1>
+<div class="cards-container">
+    {% for key, value in message.items() %}
+        <div class="card">
+            <div class="card-content">
+                <h2 class="card-title">{{ key }}</h2>
+                <p class="card-text">{{ value }}</p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+</div>
+{% endblock %}
