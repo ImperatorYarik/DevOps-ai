@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}DevOps AI Setup{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--vscode-bg);
+        }
+        .content {
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: var(--vscode-blue);
+            margin-bottom: 30px;
+        }
+        .setup-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+        }
+        .logo-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 50%;
+        }
+        .logo {
+            width: 150px;
+            height: 150px;
+            transition: transform 0.3s ease;
+            justify-self: center;
+            object-fit: contain;
+        }
+        .logo:hover {
+            transform: scale(1.1);
+        }
+        .logo:nth-child(even) {
+            margin-top: 30px;
+        }
+        .form-container {
+            width: 50%;
+        }
+        form {
+            background-color: var(--vscode-menu);
+            padding: 30px;
+            border-radius: 5px;
+            border: 1px solid var(--vscode-menu-hover);
+        }
+        h2 {
+            color: var(--vscode-blue);
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--vscode-text);
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 3px;
+            border: 1px solid var(--vscode-menu-hover);
+            background-color: var(--vscode-bg);
+            color: var(--vscode-text);
+        }
+        input:focus {
+            outline: none;
+            border-color: var(--vscode-blue);
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--vscode-blue);
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: var(--vscode-purple);
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>DevOps AI Initial Setup</h1>
+
+        <div class="setup-container">
+            <div class="logo-container">
+                <img src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/97_Docker_logo_logos-512.png" alt="Docker" class="logo">
+                <img src="https://download.logo.wine/logo/Nginx/Nginx-Logo.wine.png" alt="Nginx" class="logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Kubernetes_logo_without_workmark.svg/1055px-Kubernetes_logo_without_workmark.svg.png" alt="Kubernetes" class="logo">
+                <img src="https://www.jenkins.io/images/logos/jenkins/jenkins.png" alt="Jenkins" class="logo">
+            </div>
+
+            <div class="form-container">
+                <form method="POST">
+                    <h2>Admin User Creation</h2>
+                    <div>
+                        <label for="username">Admin Username:</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div>
+                        <label for="password">Admin Password:</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <div>
+                        <label for="confirm_password">Confirm Password:</label>
+                        <input type="password" id="confirm_password" name="confirm_password" required>
+                    </div>
+                    <button type="submit">Complete Setup</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
