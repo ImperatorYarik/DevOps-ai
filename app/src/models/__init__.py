@@ -4,4 +4,4 @@ class User:
 
     @staticmethod
     def get_welcome_message():
-        return "Welcome to Flask MVC App!"
+        return "Welcome to DevOps AI!"

@@ -5,6 +5,83 @@
 {% block content %}
 <div class="container">
     <h1>{{ message }}</h1>
-    <p>This is a basic Flask application using the MVC pattern.</p>
+    <p>A web application that analyzes logs from servers (Nginx, Docker, Kubernetes, Jenkins) and provides insights or suggestions for fixing issues.</p>
+    <div class="cards-container">
+        <div class="card">
+            <div class="card-content">
+                <h2 class="card-title">Documentation</h2>
+                <p class="card-text">Learn more about Flask and how to build web applications.</p>
+                <a href="/docs" class="card-link">Read More →</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-content">
+                <h2 class="card-title">API Reference</h2>
+                <p class="card-text">Explore our API endpoints and integration guides.</p>
+                <a href="/api" class="card-link">View API →</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-content">
+                <h2 class="card-title">Examples</h2>
+                <p class="card-text">Check out example projects and code snippets.</p>
+                <a href="/examples" class="card-link">View Examples →</a>
+            </div>
+        </div>
+    </div>
+    <div class="log-viewer">
+        <div class="log-header">
+            <h2>System Logs</h2>
+            <button onclick="clearLogs()" class="clear-button">Clear</button>
+        </div>
+        <div id="log-container"></div>
+    </div>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const logContainer = document.getElementById('log-container');
+    const maxLogs = 100; // Maximum number of logs to show
+
+    // Connect to SSE endpoint
+    const eventSource = new EventSource('/stream-logs');
+
+    eventSource.onmessage = function(event) {
+        const logEntry = event.data;
+
+        // Create new log element
+        const logElement = document.createElement('div');
+        logElement.className = 'log-entry';
+        logElement.textContent = logEntry;
+
+        // Add appropriate class based on log level
+        if (logEntry.includes('ERROR')) {
+            logElement.classList.add('error-log');
+        } else if (logEntry.includes('WARNING')) {
+            logElement.classList.add('warning-log');
+        } else if (logEntry.includes('DEBUG')) {
+            logElement.classList.add('debug-log');
+        }
+
+        // Add new log at the top
+        logContainer.insertBefore(logElement, logContainer.firstChild);
+
+        // Remove old logs if exceeding maximum
+        while (logContainer.children.length > maxLogs) {
+            logContainer.removeChild(logContainer.lastChild);
+        }
+    };
+
+    eventSource.onerror = function(error) {
+        console.error('EventSource failed:', error);
+        eventSource.close();
+    };
+});
+
+function clearLogs() {
+    document.getElementById('log-container').innerHTML = '';
+}
+</script>
+
 {% endblock %}
