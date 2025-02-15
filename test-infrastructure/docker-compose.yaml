@@ -1,0 +1,64 @@
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: DevOps-ai-jenkins
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+      - 50000:50000
+    volumes:
+      - DevOps-ai-jenkins_home:/var/jenkins_home
+
+  nexus:
+    image: sonatype/nexus3
+    container_name: DevOps-ai-nexus
+    restart: unless-stopped
+    ports:
+      - 8081:8080
+      - 5000:5000
+    volumes:
+      - DevOps-ai-nexus_data:/nexus_data
+
+  sonarqube:
+    image: sonarqube:lts
+    container_name: DevOps-ai-sonarqube
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    ports:
+      - 9000:9000
+    environment:
+      SONAR_JDBC_URL: jdbc:postgresql://postgres:5432/sonarqube
+      SONAR_JDBC_USERNAME: ${SONAR_JDBC_USERNAME}
+      SONAR_JDBC_PASSWORD: ${SONAR_JDBC_PASSWORD}
+    volumes:
+      - DevOps-ai-sonarqube_data:/opt/sonarqube/data
+      - DevOps-ai-sonarqube_extensions:/opt/sonarqube/extensions
+    networks:
+      - DevOps-ai-sonar_postgres
+
+  postgres:
+    image: postgres:15
+    container_name: DevOps-ai-postgres
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_MULTIPLE_DATABASES: "sonarqube, devops-ai"
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - DevOps-ai-postgres_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    networks:
+      - DevOps-ai-sonar_postgres
+
+volumes:
+  DevOps-ai-jenkins_home:
+  DevOps-ai-nexus_data:
+  DevOps-ai-sonarqube_data:
+  DevOps-ai-sonarqube_extensions:
+  DevOps-ai-postgres_data:
+
+networks:
+  DevOps-ai-sonar_postgres:
