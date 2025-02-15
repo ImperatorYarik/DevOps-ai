@@ -10,6 +10,8 @@ def create_app():
 
     # Register blueprints
     from src.controllers.home_controller import home_bp
+    from src.controllers.docker_controller import docker_bp
     app.register_blueprint(home_bp)
+    app.register_blueprint(docker_bp)
 
     return app

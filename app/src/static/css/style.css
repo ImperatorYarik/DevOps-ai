@@ -310,3 +310,114 @@ tr:nth-child(even) {
     color: #6a9955;
     background-color: rgba(106, 153, 85, 0.1);
 }
+.layout {
+    display: flex;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: var(--vscode-menu);
+    padding: 20px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    overflow-y: auto;
+    border-right: 1px solid #454545;
+}
+
+.sidebar h2 {
+    color: var(--vscode-blue);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background-color: var(--vscode-menu-hover);
+    color: var(--vscode-text);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.sidebar ul li a:hover {
+    background-color: var(--vscode-blue);
+    color: #fff;
+    transform: scale(1.05);
+}
+
+.layout {
+    display: flex;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: var(--vscode-menu);
+    padding: 20px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    overflow-y: auto;
+    border-right: 1px solid #454545;
+}
+
+.sidebar h2 {
+    color: var(--vscode-blue);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    display: block;
+    text-align: left;
+    padding: 10px 15px;
+    background-color: var(--vscode-menu-hover);
+    color: var(--vscode-text);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.2s, transform 0.1s;
+    font-size: 14px;
+}
+
+.sidebar ul li a:hover {
+    background-color: var(--vscode-blue);
+    color: #fff;
+    transform: translateX(5px);
+}
+
+.sidebar ul li a i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+/* Adjust main content */
+.content {
+    margin-left: 270px;
+    padding: 20px;
+    flex-grow: 1;
+}
