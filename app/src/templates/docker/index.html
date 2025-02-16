@@ -1,18 +1,73 @@
 {% extends "base.html" %}
 
-{% block content %}
-<div class="container">
+{% block title %}Docker Information{% endblock %}
 
-<h1>Docker</h1>
-<div class="cards-container">
-    {% for key, value in message.items() %}
-        <div class="card">
-            <div class="card-content">
-                <h2 class="card-title">{{ key }}</h2>
-                <p class="card-text">{{ value }}</p>
+{% block extra_css %}
+<style>
+    .docker-container {
+        padding: 20px;
+    }
+
+    .section-title {
+        color: var(--vscode-blue);
+        font-size: 1.2em;
+        margin-bottom: 15px;
+        border-bottom: 1px solid var(--vscode-menu-hover);
+        padding-bottom: 5px;
+    }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+    }
+
+    .info-item {
+        background-color: var(--vscode-menu);
+        border: 1px solid var(--vscode-menu-hover);
+        border-radius: 3px;
+        padding: 15px;
+    }
+
+    .info-key {
+        color: var(--vscode-yellow);
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .info-value {
+        color: var(--vscode-text);
+        font-family: 'Courier New', monospace;
+    }
+
+    .docker-icon {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+    }
+
+    .header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="docker-container">
+    <div class="header">
+        <img src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/97_Docker_logo_logos-512.png" alt="Docker Icon" class="docker-icon">
+        <h1 class="section-title">Docker Information</h1>
+    </div>
+
+    <div class="info-grid">
+        {% for key, value in message.items() %}
+            <div class="info-item">
+                <div class="info-key">{{ key }}</div>
+                <div class="info-value">{{ value }}</div>
             </div>
-        </div>
-    {% endfor %}
-</div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
