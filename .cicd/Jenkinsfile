@@ -6,6 +6,9 @@ pipeline {
        DOCKER_CREDS=credentials("nexus-registry")
        DOCKER_REGISTRY="nexus:8082"
     }
+    tools {
+        docker "latest"
+    }
     stages {
 
         stage('Build') {
