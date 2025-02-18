@@ -1,0 +1,48 @@
+pipeline {
+    agent any
+    environment {
+       DOCKER_IMAGE_NAME="devopsai"
+       DOCKER_IMAGE_TAG="latest"
+       DOCKER_CREDS=credentials("nexus-registry")
+       DOCKER_REGISTRY="nexus:8082"
+    }
+    stages {
+
+        stage('Build') {
+            steps {
+                sh "
+                cd app \
+                docker build -t ${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_NAME} .
+                "
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // Run the test commands
+                sh 'echo test'
+            }
+        }
+
+        stage('Login and Push to Docker Registry') {
+            steps {
+                sh "echo ${DOCKER_CREDS_PSW} | docker login ${DOCKER_REGISTRY} -u ${DOCKER_CREDS_USR} --password-stdin"
+
+                sh "docker push ${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_NAME}"
+            }
+        }
+    }
+
+    post {
+        always {
+            // Clean up workspace
+            cleanWs()
+        }
+        success {
+            echo 'The Pipeline succeeded!'
+        }
+        failure {
+            echo 'The Pipeline failed!'
+        }
+    }
+}

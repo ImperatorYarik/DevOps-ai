@@ -8,16 +8,20 @@ services:
       - 50000:50000
     volumes:
       - DevOps-ai-jenkins_home:/var/jenkins_home
+    networks:
+      - DevOps-ai-jenkins_nexus
 
   nexus:
-    image: sonatype/nexus3
+    image: sonatype/nexus3:latest
     container_name: DevOps-ai-nexus
     restart: unless-stopped
     ports:
-      - 8081:8080
-      - 5000:5000
+      - 8081:8081
+      - 8082:8082
     volumes:
       - DevOps-ai-nexus_data:/nexus_data
+    networks:
+      - DevOps-ai-jenkins_nexus
 
   sonarqube:
     image: sonarqube:lts
@@ -62,3 +66,4 @@ volumes:
 
 networks:
   DevOps-ai-sonar_postgres:
+  DevOps-ai-jenkins_nexus:
